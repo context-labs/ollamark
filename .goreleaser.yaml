@@ -1,0 +1,25 @@
+# .goreleaser.yaml
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    binary: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
+    hooks:
+      post: mv "{{ .Path }}" "{{ .Path }}{{ if eq .Os \"windows\" }}.exe{{ end }}"
+
+# Disable archives
+archives:
+  - format: binary
+
+# If you want to add checksums and signatures
+checksum:
+  name_template: 'checksums.txt'
+signs:
+  - artifacts: checksum
+    args: ["--output", "${signature}", "--detach-sign", "--local-user", "${gpg_key_id}", "${artifact}"]
