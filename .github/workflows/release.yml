@@ -15,25 +15,31 @@ jobs:
     - name: Set up Go
       uses: actions/setup-go@v3
       with:
-        go-version: '1.20'
+        go-version: '1.20'  # Ensure this is the version you want to use
+
+    - name: Download macOS SDK
+      run: |
+        curl -L -o MacOSX11.1.sdk.tar.xz "https://github.com/joseluisq/macosx-sdks/releases/download/11.1/MacOSX11.1.sdk.tar.xz"
+        sudo mkdir -p /opt/MacOSX11.1.sdk
+        sudo tar -xJf MacOSX11.1.sdk.tar.xz -C /opt/MacOSX11.1.sdk
 
     - name: Install fyne-cross
-      run: |
-        go install github.com/fyne-io/fyne-cross@latest
+      run: go install github.com/fyne-io/fyne-cross@latest
 
     - name: Install X11 development libraries
       run: |
         sudo apt-get update
         sudo apt-get install -y libx11-dev libxcursor-dev libxrandr-dev libxinerama-dev libgl1-mesa-dev libxi-dev libxext-dev libglu1-mesa-dev xorg-dev
-    
+
     - name: Build
       run: |
         fyne-cross windows -arch=amd64 -icon icon.png
         fyne-cross linux -arch=amd64 -icon icon.png
-        fyne-cross darwin -arch=amd64 -icon icon.png
+        fyne-cross darwin -arch=arm64 -icon icon.png
       env:
-        FYNE_CROSS_TARGETS: windows/amd64 linux/amd64 darwin/amd64
-    
+        FYNE_CROSS_TARGETS: windows/amd64 linux/amd64 darwin/arm64
+        FYNE_CROSS_DARWIN_SDK: /opt/MacOSX11.1.sdk
+
     - name: Release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
@@ -41,4 +47,4 @@ jobs:
         files: |
           fyne-cross/bin/windows-amd64/Ollamark.exe
           fyne-cross/bin/linux-amd64/Ollamark
-          fyne-cross/bin/darwin-amd64/Ollamark.app
+          fyne-cross/bin/darwin-arm64/Ollamark.app

@@ -11,7 +11,7 @@ builds:
       - arm64
     binary: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
     hooks:
-      post: mv "{{ .Path }}" "{{ .Path }}{{ if eq .Os 'windows' }}.exe{{ end }}"
+      post: mv '{{ .Path }}' '{{ .Path }}{{ if eq .Os "windows" }}.exe{{ end }}'
 
 # Disable archives
 archives:
