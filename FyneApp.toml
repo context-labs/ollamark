@@ -1,0 +1,8 @@
+Website = "https://ollamark.com"
+
+[Details]
+  Icon = "icon.png"
+  Name = "Ollamark"
+  ID = "com.ollamark.app"
+  Version = "1.0.0"
+  Build = 4

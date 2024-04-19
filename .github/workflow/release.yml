@@ -1,0 +1,39 @@
+# Release build workflow for Go Lang Fyne app Ollamark
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: 1.22.2
+
+    - name: Install fyne-cross
+      run: |
+        go install github.com/fyne-io/fyne-cross@latest
+    
+    - name: Build
+      run: |
+        fyne-cross windows -arch=amd64 -icon logov2.png
+        fyne-cross linux -arch=amd64 -icon logov2.png
+        fyne-cross darwin -arch=amd64 -icon logov2.png
+      env:
+        FYNE_CROSS_TARGETS: windows/amd64 linux/amd64 darwin/amd64
+    
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: |
+          fyne-cross/bin/windows-amd64/Ollamark.exe
+          fyne-cross/bin/linux-amd64/Ollamark
+          fyne-cross/bin/darwin-amd64/Ollamark.app
