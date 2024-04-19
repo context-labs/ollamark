@@ -1,6 +1,6 @@
-module ollamark.com/ollamark/v2
+module github.com/context-labs/ollamark/v2
 
-go 1.22
+go 1.20
 
 require (
 	fyne.io/fyne v1.4.3 // indirect
