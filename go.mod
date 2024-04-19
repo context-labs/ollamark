@@ -1,6 +1,6 @@
 module ollamark.com/ollamark/v2
 
-go 1.22.1
+go 1.22
 
 require (
 	fyne.io/fyne v1.4.3 // indirect
