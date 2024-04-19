@@ -35,7 +35,7 @@ jobs:
       run: |
         fyne-cross windows -arch=amd64 -icon icon.png
         fyne-cross linux -arch=amd64 -icon icon.png
-        fyne-cross darwin -arch=arm64 -icon icon.png
+        fyne-cross darwin -arch=arm64 -icon icon.png --macosx-sdk-path /opt/MacOSX11.1.sdk -app-id com.contextlabs.ollamark
       env:
         FYNE_CROSS_TARGETS: windows/amd64 linux/amd64 darwin/arm64
         FYNE_CROSS_DARWIN_SDK: /opt/MacOSX11.1.sdk
