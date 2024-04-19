@@ -23,9 +23,9 @@ jobs:
     
     - name: Build
       run: |
-        fyne-cross windows -arch=amd64 -icon logov2.png
-        fyne-cross linux -arch=amd64 -icon logov2.png
-        fyne-cross darwin -arch=amd64 -icon logov2.png
+        fyne-cross windows -arch=amd64 -icon icon.png
+        fyne-cross linux -arch=amd64 -icon icon.png
+        fyne-cross darwin -arch=amd64 -icon icon.png
       env:
         FYNE_CROSS_TARGETS: windows/amd64 linux/amd64 darwin/amd64
     
