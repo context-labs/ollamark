@@ -56,6 +56,8 @@ var MODELS = []string{
 	"command-r-plus",
 	"dolphin-llama3",
 	"dolphin-mixtral:8x22b",
+	"llama3:70b",
+	"llama3-gradient",
 }
 
 func main() {
