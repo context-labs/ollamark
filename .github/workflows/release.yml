@@ -42,11 +42,12 @@ jobs:
           fyne-cross windows -arch=amd64 -icon icon.png
           fyne-cross linux -arch=amd64 -icon icon.png
         elif [ "${{ matrix.os }}" == "macos-latest" ]; then
-          fyne-cross darwin -arch=arm64 -icon icon.png --macosx-sdk-path /opt/MacOSX13.3.sdk -app-id com.contextlabs.ollamark
+          fyne-cross darwin -arch=arm64 -icon icon.png -app-id com.contextlabs.ollamark
         fi
       env:
         FYNE_CROSS_TARGETS: windows/amd64 linux/amd64 darwin/arm64
         FYNE_CROSS_DARWIN_SDK: /opt/MacOSX13.3.sdk
+        SDKROOT: /opt/MacOSX13.3.sdk
 
     - name: Release
       uses: softprops/action-gh-release@v1
