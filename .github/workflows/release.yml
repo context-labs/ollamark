@@ -19,9 +19,9 @@ jobs:
 
     - name: Download macOS SDK
       run: |
-        curl -L -o MacOSX12.5.sdk.tar.xz "https://github.com/joseluisq/macosx-sdks/releases/download/12.5/MacOSX12.5.sdk.tar.xz"
-        sudo mkdir -p /opt/MacOSX12.5.sdk
-        sudo tar -xJf MacOSX12.5.sdk.tar.xz -C /opt/MacOSX12.5.sdk
+        curl -L -o MacOSX13.3.sdk.tar.xz "https://github.com/joseluisq/macosx-sdks/releases/download/13.3/MacOSX13.3.sdk.tar.xz"
+        sudo mkdir -p /opt/MacOSX13.3.sdk
+        sudo tar -xJf MacOSX13.3.sdk.tar.xz -C /opt/MacOSX13.3.sdk
 
     - name: Install fyne-cross
       run: go install github.com/fyne-io/fyne-cross@latest
@@ -35,10 +35,10 @@ jobs:
       run: |
         fyne-cross windows -arch=amd64 -icon icon.png
         fyne-cross linux -arch=amd64 -icon icon.png
-        fyne-cross darwin -arch=arm64 -icon icon.png --macosx-sdk-path /opt/MacOSX12.5.sdk -app-id com.contextlabs.ollamark
+        fyne-cross darwin -arch=arm64 -icon icon.png --macosx-sdk-path /opt/MacOSX13.3.sdk -app-id com.contextlabs.ollamark
       env:
         FYNE_CROSS_TARGETS: windows/amd64 linux/amd64 darwin/arm64
-        FYNE_CROSS_DARWIN_SDK: /opt/MacOSX12.5.sdk
+        FYNE_CROSS_DARWIN_SDK: /opt/MacOSX13.3.sdk
 
     - name: Release
       uses: softprops/action-gh-release@v1
