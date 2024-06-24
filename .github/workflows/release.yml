@@ -50,7 +50,7 @@ jobs:
           fyne-cross windows -arch=amd64 -icon icon.png
           fyne-cross linux -arch=amd64 -icon icon.png
         elif [ "${{ matrix.os }}" == "macos-latest" ]; then
-          fyne-cross darwin -arch=arm64 -icon icon.png --macosx-sdk-path /opt/MacOSX13.3.sdk -app-id com.contextlabs.ollamark 
+          fyne-cross darwin -arch=arm64 -icon icon.png -app-id com.contextlabs.ollamark 
         fi
       shell: bash
       env:
