@@ -5,3 +5,10 @@ ollamark.exe
 ollamark.app
 
 .env
+private_key.pem
+public_key.pem
+server/server.exe
+server/server
+
+node_modules
+package-lock.json

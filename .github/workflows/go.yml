@@ -2,11 +2,13 @@ name: Go
 
 on:
   push:
-    branches: [ "main" ]
+    tags:
+      - 'v*'
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: main
     steps:
     - uses: actions/checkout@v4
 
@@ -19,6 +21,13 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y libx11-dev libxcursor-dev libxrandr-dev libxinerama-dev libgl1-mesa-dev libxi-dev libxext-dev libglu1-mesa-dev xorg-dev
+
+    - name: Create .env file
+      run: |
+        echo "OLLAMARK_API=${{ secrets.OLLAMARK_API }}" > .env
+        echo "PUBLIC_KEY=${{ secrets.PUBLIC_KEY }}" >> .env
+        echo "KEY=${{ secrets.KEY }}" >> .env
+      shell: bash
 
     - name: Build
       run: go build -v ./...

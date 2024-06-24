@@ -3,12 +3,12 @@ name: Release
 
 on:
   push:
-    tags:
-      - 'v*'
+    branches: [ "main" ]
 
 jobs:
   release:
     runs-on: ${{ matrix.os }}
+    environment: main
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
@@ -21,7 +21,9 @@ jobs:
         go-version: '1.20'  # Ensure this is the version you want to use
 
     - name: Install fyne-cross
-      run: go install github.com/fyne-io/fyne-cross@latest
+      run: |
+        go install github.com/fyne-io/fyne-cross@latest
+        fyne-cross -v
 
     - name: Install X11 development libraries
       if: matrix.os == 'ubuntu-latest'
@@ -30,28 +32,35 @@ jobs:
         sudo apt-get install -y libx11-dev libxcursor-dev libxrandr-dev libxinerama-dev libgl1-mesa-dev libxi-dev libxext-dev libglu1-mesa-dev xorg-dev
 
     - name: Download macOS SDK
-      if: matrix.os == 'macos-latest'
       run: |
         curl -L -o MacOSX13.3.sdk.tar.xz "https://github.com/joseluisq/macosx-sdks/releases/download/13.3/MacOSX13.3.sdk.tar.xz"
         sudo mkdir -p /opt/MacOSX13.3.sdk
         sudo tar -xJf MacOSX13.3.sdk.tar.xz -C /opt/MacOSX13.3.sdk
+
+    - name: Create .env file
+      run: |
+        echo "OLLAMARK_API=${{ secrets.OLLAMARK_API }}" > .env
+        echo "PUBLIC_KEY=${{ secrets.PUBLIC_KEY }}" >> .env
+        echo "KEY=${{ secrets.KEY }}" >> .env
+      shell: bash
 
     - name: Build
       run: |
         if [ "${{ matrix.os }}" == "ubuntu-latest" ]; then
           fyne-cross windows -arch=amd64 -icon icon.png
           fyne-cross linux -arch=amd64 -icon icon.png
-        elif [ "${{ matrix.os }}" == "macos-latest" ]; then
+        # elif [ "${{ matrix.os }}" == "macos-latest" ]; then
           fyne-cross darwin -arch=arm64 -icon icon.png -app-id com.contextlabs.ollamark
         fi
+      shell: bash
       env:
         FYNE_CROSS_TARGETS: windows/amd64 linux/amd64 darwin/arm64
         FYNE_CROSS_DARWIN_SDK: /opt/MacOSX13.3.sdk
         SDKROOT: /opt/MacOSX13.3.sdk
+        PATH: ${{ github.workspace }}/go/bin:$PATH
 
     - name: Release
       uses: softprops/action-gh-release@v1
-      if: startsWith(github.ref, 'refs/tags/')
       with:
         files: |
           fyne-cross/bin/windows-amd64/Ollamark.exe

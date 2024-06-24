@@ -1,0 +1,199 @@
+.benchmark-table-container {
+  border-radius: 15px;
+  overflow: hidden; 
+  }
+  
+  .filters {
+    margin-bottom: 20px;
+  }
+
+  .topgrid {
+    background-color: rgb(62 133 255 / 5%);
+  }
+
+  .benchmark-table {
+    width: 100%;
+    overflow: hidden;
+    border-spacing: 0;
+    border-collapse: separate;
+    border-radius: 15px;
+
+    border: 1px solid #3b3b3b;
+   }
+
+  .benchmark-table th:not(:last-child),
+  .benchmark-table td:not(:last-child) {
+  border-right: 1px solid #3b3b3b;
+  }
+
+  /* Apply a border to the bottom of all but the last row */
+  .benchmark-table>thead>tr:not(:last-child)>th,
+  .benchmark-table>thead>tr:not(:last-child)>td,
+  .benchmark-table>tbody>tr:not(:last-child)>th,
+  .benchmark-table>tbody>tr:not(:last-child)>td,
+  .benchmark-table>tfoot>tr:not(:last-child)>th,
+  .benchmark-table>tfoot>tr:not(:last-child)>td,
+  .benchmark-table>tr:not(:last-child)>td,
+  .benchmark-table>tr:not(:last-child)>th,
+  .benchmark-table>thead:not(:last-child),
+  .benchmark-table>tbody:not(:last-child),
+  .benchmark-table>tfoot:not(:last-child) {
+      border-bottom: 1px solid #3b3b3b;
+    }
+  
+  .benchmark-table th {
+    border: none;
+    padding: 15px;
+  }
+  
+  .benchmark-table th {
+    cursor: pointer;
+    background-color: #181e25;
+    color: #fff;
+  }
+  
+  .benchmark-table th:hover {
+    background-color: #0a0b0c;
+  }
+  
+  .benchmark-table tr:nth-child(even) {
+    background-color: #181e25;
+    border-bottom: 1px solid black;
+  }
+
+  .benchmark-table tr:nth-child(odd) {
+    border-bottom: 1px solid black;
+}
+  
+  .benchmark-table tr:hover {
+    background-color: #0a0b0c;
+  }
+
+  .benchmark-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .benchmark-table tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+    border-bottom: none; /* Remove bottom border */
+  }
+  
+  .benchmark-table tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+    border-bottom: none; /* Remove bottom border */
+  }
+
+  .benchmark-table td {
+    padding: 15px;
+  }
+
+  /* Mobile styles */
+@media (max-width: 768px) {
+  .benchmark-table {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .benchmark-table tr {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2px;
+    border: none;
+    text-align: center;
+    /* border-radius: 10px; */
+    padding: 8px;
+  }
+
+  .benchmark-table th, .benchmark-table td {
+    border: none;
+    padding: 4px 0;
+  }
+
+  .benchmark-table th {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    display: none;
+  }
+
+  .benchmark-table tr:nth-child(even) {
+    background-color: transparent;
+    border: none;
+  }
+
+  .benchmark-table tr:hover {
+    background-color: transparent;
+    border: none;
+  }
+  .benchmark-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .benchmark-table tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+    border-bottom: none; /* Remove bottom border */
+  }
+  
+  .benchmark-table tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+    border-bottom: none; /* Remove bottom border */
+  }
+
+}
+
+.stats-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 50px;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .stats-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+}
+
+  
+  .pagination {
+    margin-top: 20px;
+  }
+  
+  .pagination button {
+    padding: 5px 10px;
+    margin: 0 5px;
+  }
+
+  input {
+    padding: 15px;
+    margin: 5px;
+    border: 1px solid #3b3b3b;
+    background-color: #050505;
+    color: #fff;
+    border-radius: 10px;
+  }
+
+  select {
+    padding: 15px;
+    margin: 5px;
+    border: 1px solid #3b3b3b;
+    background-color: #050505;
+    color: #fff;
+    border-radius: 10px;
+  }
+
+  .os-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .animate-spin {
+    animation: spin 1s linear infinite;
+  }

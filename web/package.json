@@ -1,0 +1,52 @@
+{
+  "name": "ollamark.com",
+  "version": "1.0.0",
+  "description": "Ollamark Web Client",
+  "author": "Carsen Klock",
+  "license": "MIT",
+  "homepage": "https://ollamark.com",
+  "private": true,
+  "proxy": "http://localhost:3333",
+  "dependencies": {
+    "@craco/craco": "^7.1.0",
+    "@radix-ui/react-icons": "^1.3.0",
+    "axios": "^1.2.1",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^5.2.1",
+    "react-router-dom": "^6.23.1",
+    "react-scripts": "5.0.1",
+    "tailwind-merge": "^2.3.0",
+    "tailwindcss-animate": "^1.0.7",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.4"
+  }
+}
