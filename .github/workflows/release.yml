@@ -23,7 +23,6 @@ jobs:
     - name: Install fyne-cross
       run: |
         go install github.com/fyne-io/fyne-cross@latest
-        fyne-cross -v
 
     - name: Install X11 development libraries
       if: matrix.os == 'ubuntu-latest'
