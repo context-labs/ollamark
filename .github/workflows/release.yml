@@ -11,7 +11,7 @@ jobs:
     environment: main
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest]
 
     steps:
     - uses: actions/checkout@v4
@@ -23,6 +23,7 @@ jobs:
     - name: Install fyne-cross
       run: |
         go install github.com/fyne-io/fyne-cross@latest
+        echo "$HOME/go/bin" >> $GITHUB_PATH
 
     - name: Install X11 development libraries
       if: matrix.os == 'ubuntu-latest'
@@ -56,7 +57,6 @@ jobs:
         FYNE_CROSS_TARGETS: windows/amd64 linux/amd64 darwin/arm64
         FYNE_CROSS_DARWIN_SDK: /opt/MacOSX13.3.sdk
         SDKROOT: /opt/MacOSX13.3.sdk
-        PATH: ${{ github.workspace }}/go/bin:$PATH
 
     - name: Release
       uses: softprops/action-gh-release@v1
